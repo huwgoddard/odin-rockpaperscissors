@@ -35,6 +35,8 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
+    console.log('Welcome to rock, paper, scissors!')
+
     playerWins=0;
     compWins=0;
     totalWins=playerWins+compWins;
@@ -42,16 +44,19 @@ function game() {
     while (totalWins<5) {
         playerSelection=prompt('Rock, Paper, Scissors? ')
         compSelection=getComputerSelection();
-        gameOutcome=playRound(playerSelection,computerSelection)
-        console.log(gameOutcome)
+        gameOutcome=playRound(playerSelection,compSelection);
         if (gameOutcome=='Player wins!') {
             playerWins++;
-            continue;
         } else if (gameOutcome=='Computer wins!') {
             compWins++;
-            continue;
+        }
+        console.log('You selected ' + playerSelection);
+        console.log('The computer selected ' + compSelection);
+        console.log(gameOutcome);
+        console.log('Player wins: ' + playerWins);
+        console.log('Computer wins: ' + compWins);
+        console.log('Total wins: ' + totalWins);
     }
 }
-const computerSelection=getComputerSelection();
-//const playerSelection=prompt('Enter Rock, Paper, or Scissors: ').toLowerCase();
-const playerSelection="rock";
+
+game();
