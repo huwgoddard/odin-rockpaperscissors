@@ -7,6 +7,7 @@ function playRound(playerSelection, computerSelection) {
     const compWin = 'Computer wins!';
     const playerWin = 'Player wins!';
     const draw = 'It\'s a draw!';
+    const badInput='Player input not understood!'
     if (playerSelection=='rock') {
         if (computerSelection=='paper') {
             return compWin;
@@ -23,7 +24,7 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return draw;
         }
-    } else /*playerSelection='scissors'*/ {
+    } else if (playerSelection=='scissors') {
         if (computerSelection=='rock') {
             return compWin;
         } else if (computerSelection=='scissors') {
@@ -31,6 +32,8 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return draw;
         }
+    } else {
+        return badInput;
     }
 }
 
@@ -39,7 +42,7 @@ function game() {
 
     playerWins=0;
     compWins=0;
-    totalWins=playerWins+compWins;
+    totalWins=0;
 
     while (totalWins<5) {
         playerSelection=prompt('Rock, Paper, Scissors? ')
@@ -47,8 +50,10 @@ function game() {
         gameOutcome=playRound(playerSelection,compSelection);
         if (gameOutcome=='Player wins!') {
             playerWins++;
+            totalWins++;
         } else if (gameOutcome=='Computer wins!') {
             compWins++;
+            totalWins++;
         }
         console.log('You selected ' + playerSelection);
         console.log('The computer selected ' + compSelection);
@@ -56,6 +61,12 @@ function game() {
         console.log('Player wins: ' + playerWins);
         console.log('Computer wins: ' + compWins);
         console.log('Total wins: ' + totalWins);
+    }
+
+    if (playerWins>compWins) {
+        console.log('Player won with ' + playerWins + ' wins!')
+    } else {
+        console.log('Computer won with ' + compWins + ' wins!')
     }
 }
 
