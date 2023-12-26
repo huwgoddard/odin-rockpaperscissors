@@ -37,20 +37,27 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+const optionButtons=document.querySelectorAll(".option");
+
+function clickOptionButton(e) {
+    console.log(playRound(e.target.textContent.toLowerCase(), getComputerSelection()));
+}
+
+for (let i=0; i<optionButtons.length; i++) {
+    optionButtons[i].addEventListener('click', clickOptionButton)
+}
+
+
+
+/* function game() {
     console.log('Welcome to rock, paper, scissors!')
 
     playerWins=0;
     compWins=0;
     totalWins=0;
 
-    const optionButtons=document.querySelectorAll(".option");
-
-    for (let i=0; i<optionButtons.length; i++) {
-        optionButtons[i].addEventListener('click', function(e) {
-            console.log(playRound(e.target.textContent.toLowerCase(), getComputerSelection()))
-        })
-    }
+    console.log("p wins " + playerWins + " c wins " + compWins + ' t wins ' + totalWins);
+} */
 
 /*     while (totalWins<5) {
         playerSelection=prompt('Rock, Paper, Scissors? ')
@@ -76,7 +83,7 @@ function game() {
     } else {
         console.log('Computer won with ' + compWins + ' wins!')
     } */
-}
 
-const startButton = document.querySelector('#start-game');
-startButton.addEventListener('click', game);
+
+/* const startButton = document.querySelector('#start-game');
+startButton.addEventListener('click', game); */
