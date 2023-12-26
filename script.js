@@ -38,14 +38,18 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const optionButtons=document.querySelectorAll(".option");
+const latestOutcome = document.querySelector('#latest-outcome')
 
 function clickOptionButton(e) {
-    console.log(playRound(e.target.textContent.toLowerCase(), getComputerSelection()));
+    gameOutcome=playRound(e.target.textContent.toLowerCase(), getComputerSelection())
+    console.log(gameOutcome);
+    latestOutcome.textContent=gameOutcome;
 }
 
 for (let i=0; i<optionButtons.length; i++) {
     optionButtons[i].addEventListener('click', clickOptionButton)
 }
+
 
 
 
