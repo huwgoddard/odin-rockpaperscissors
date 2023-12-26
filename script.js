@@ -44,7 +44,15 @@ function game() {
     compWins=0;
     totalWins=0;
 
-    while (totalWins<5) {
+    const optionButtons=document.querySelectorAll(".option");
+
+    for (let i=0; i<optionButtons.length; i++) {
+        optionButtons[i].addEventListener('click', function(e) {
+            console.log(playRound(e.target.textContent.toLowerCase(), getComputerSelection()))
+        })
+    }
+
+/*     while (totalWins<5) {
         playerSelection=prompt('Rock, Paper, Scissors? ')
         compSelection=getComputerSelection();
         gameOutcome=playRound(playerSelection,compSelection);
@@ -67,7 +75,8 @@ function game() {
         console.log('Player won with ' + playerWins + ' wins!')
     } else {
         console.log('Computer won with ' + compWins + ' wins!')
-    }
+    } */
 }
 
-game();
+const startButton = document.querySelector('#start-game');
+startButton.addEventListener('click', game);
