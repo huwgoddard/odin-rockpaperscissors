@@ -38,12 +38,28 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const optionButtons=document.querySelectorAll(".option");
-const latestOutcome = document.querySelector('#latest-outcome')
+const latestOutcome = document.querySelector('#latest-outcome');
+const runningScore = document.querySelector('#running-score');
+
+let playerWins=0;
+let compWins=0;
+let totalWins=0;
+
+latestOutcome.textContent='Welcome to Rock, Paper, Scissors!'
+runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
 
 function clickOptionButton(e) {
     gameOutcome=playRound(e.target.textContent.toLowerCase(), getComputerSelection())
     console.log(gameOutcome);
     latestOutcome.textContent=gameOutcome;
+    if (gameOutcome=='Player wins!') {
+        playerWins++;
+        totalWins++;
+    } else if (gameOutcome=='Computer wins!') {
+        compWins++;
+        totalWins++;
+    }
+    runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
 }
 
 for (let i=0; i<optionButtons.length; i++) {
