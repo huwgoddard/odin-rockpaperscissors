@@ -40,6 +40,7 @@ function playRound(playerSelection, computerSelection) {
 const optionButtons=document.querySelectorAll(".option");
 const latestOutcome = document.querySelector('#latest-outcome');
 const runningScore = document.querySelector('#running-score');
+const winner=document.querySelector('#winner')
 
 let playerWins=0;
 let compWins=0;
@@ -60,6 +61,13 @@ function clickOptionButton(e) {
         totalWins++;
     }
     runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
+    if (totalWins===5) {
+        if (playerWins>compWins) {
+            winner.textContent=`The winner is the Player with ${playerWins} wins!`
+        } else {
+            winner.textContent=`The winner is the Computer with ${compWins} wins!`
+        }
+    }
 }
 
 for (let i=0; i<optionButtons.length; i++) {
