@@ -2,12 +2,10 @@ function getComputerSelection() {
     return ['rock','paper','scissors'][Math.floor(Math.random()*3)]; 
 }
 
-
 function playRound(playerSelection, computerSelection) {
     const compWin = 'Computer wins!';
     const playerWin = 'Player wins!';
     const draw = 'It\'s a draw!';
-    const badInput='Player input not understood!'
     if (playerSelection=='rock') {
         if (computerSelection=='paper') {
             return compWin;
@@ -32,47 +30,7 @@ function playRound(playerSelection, computerSelection) {
         } else {
             return draw;
         }
-    } else {
-        return badInput;
     }
-}
-
-const optionButtons=document.querySelectorAll(".option");
-const latestOutcome = document.querySelector('#latest-outcome');
-const runningScore = document.querySelector('#running-score');
-const winner=document.querySelector('#winner')
-
-let playerWins=0;
-let compWins=0;
-let totalWins=0;
-
-latestOutcome.textContent='Welcome to Rock, Paper, Scissors!'
-runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
-winner.textContent='No winner yet!';
-
-function clickOptionButton(e) {
-    gameOutcome=playRound(e.target.textContent.toLowerCase(), getComputerSelection())
-    console.log(gameOutcome);
-    latestOutcome.textContent=gameOutcome;
-    if (gameOutcome=='Player wins!') {
-        playerWins++;
-        totalWins++;
-    } else if (gameOutcome=='Computer wins!') {
-        compWins++;
-        totalWins++;
-    }
-    runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
-    if (totalWins===5) {
-        if (playerWins>compWins) {
-            winner.textContent=`The winner is the Player with ${playerWins} wins!`
-        } else {
-            winner.textContent=`The winner is the Computer with ${compWins} wins!`
-        }
-    }
-}
-
-for (let i=0; i<optionButtons.length; i++) {
-    optionButtons[i].addEventListener('click', clickOptionButton)
 }
 
 function reset() {
@@ -84,6 +42,42 @@ function reset() {
     winner.textContent='No winner yet!';
 }
 
-let resetButton = document.querySelector('#restart');
+function clickOptionButton(e) {
+    gameOutcome=playRound(e.target.textContent.toLowerCase(), getComputerSelection())
+    latestOutcome.textContent=gameOutcome;
+    if (gameOutcome=='Player wins!') {
+        playerWins++;
+        totalWins++;
+    } else if (gameOutcome=='Computer wins!') {
+        compWins++;
+        totalWins++;
+    }
+    runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
+    if (totalWins>=5) {
+        if (playerWins>compWins) {
+            winner.textContent=`The winner is the Player with ${playerWins} wins!`
+        } else {
+            winner.textContent=`The winner is the Computer with ${compWins} wins!`
+        }
+    }
+}
+
+const optionButtons=document.querySelectorAll(".option");
+const latestOutcome = document.querySelector('#latest-outcome');
+const runningScore = document.querySelector('#running-score');
+const winner=document.querySelector('#winner')
+const resetButton = document.querySelector('#restart');
+
+let playerWins=0;
+let compWins=0;
+let totalWins=0;
+
+latestOutcome.textContent='Welcome to Rock, Paper, Scissors!'
+runningScore.textContent=`Player wins: ${playerWins}, Comp wins: ${compWins}, Total wins: ${totalWins}`;
+winner.textContent='No winner yet!';
+
+for (let i=0; i<optionButtons.length; i++) {
+    optionButtons[i].addEventListener('click', clickOptionButton)
+}
 
 resetButton.addEventListener('click', reset);
